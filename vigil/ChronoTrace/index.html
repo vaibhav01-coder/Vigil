@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vigil Protocol — Advanced NTFS timeline anti-forensics detection engine. Correlates MFT metadata, USN Journal events, and $LogFile LSN sequences to detect tampering in real-time." />
+  <meta name="keywords" content="NTFS forensics, MFT analysis, USN Journal, digital forensics, timeline manipulation, Vigil" />
+  <meta name="theme-color" content="#00ffff" />
+  <title>Vigil Protocol — NTFS Timeline Manipulation Detection</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVIGATION
+  ════════════════════════════════════════════════════════════ -->
+  <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <a href="#hero" class="nav-logo" aria-label="Vigil Home">VI<span>GIL</span></a>
+
+    <ul class="nav-links">
+      <li><a href="#hero" id="nav-home">Home</a></li>
+      <li><a href="#demo" id="nav-demo">Live Demo</a></li>
+      <li><a href="#contradiction-board" id="nav-source-board">Source Board</a></li>
+      <li><a href="#file-description" id="nav-file-description">File Description</a></li>
+    </ul>
+
+    <div class="nav-status" aria-label="System status">
+      <span class="status-dot"></span>
+      SYSTEM ACTIVE
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 1 — HERO
+  ════════════════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Hero">
+    <canvas id="matrix-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-glow-orb orb-1" aria-hidden="true"></div>
+    <div class="hero-glow-orb orb-2" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge" aria-label="Status badge">
+        <span class="hero-badge-dot"></span>
+        NTFS FORENSIC INTELLIGENCE PLATFORM
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line-1">Vigil</span>
+        <span class="line-2">Protocol</span>
+      </h1>
+
+      <p class="hero-sub">
+        Detecting Live NTFS Timeline Manipulation in Real-Time
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#demo" class="btn btn-primary" id="hero-launch-btn" role="button">
+          ⚡ Launch Analysis Engine
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span class="scroll-line"></span>
+      SCROLL
+    </div>
+  </section>
+
+  <div class="gradient-line" aria-hidden="true"></div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 4 — LIVE DEMO
+  ════════════════════════════════════════════════════════════ -->
+  <section id="demo" aria-labelledby="demo-title">
+    <div class="demo-wrapper">
+      <div class="fade-in">
+        <p class="section-label">Interactive Demo</p>
+        <h2 class="section-title" id="demo-title">
+          Live Forensic <span>Analysis Feed</span>
+        </h2>
+        <div class="section-divider" style="margin: 0 auto;"></div>
+        <p style="color: rgba(232,244,248,0.5); font-size: 0.82rem; letter-spacing: 1px; margin-top: 8px;">
+          Enter folder or file path to scan.
+        </p>
+      </div>
+
+      <!-- Terminal Window -->
+      <div class="terminal-window fade-in" data-delay="150" aria-label="Terminal forensic output">
+        <!-- Bar -->
+        <div class="terminal-bar">
+          <div class="terminal-dots" aria-hidden="true">
+            <span class="t-dot red"></span>
+            <span class="t-dot yellow"></span>
+            <span class="t-dot green"></span>
+          </div>
+          <span class="terminal-title">vigil@forensics-lab:~$</span>
+        </div>
+
+        <!-- Body -->
+        <div class="terminal-body">
+          <div class="terminal-prompt" id="terminal-prompt-text">
+            vigil --scan --target ntfs://C:/Windows
+          </div>
+
+          <div class="output-divider">────────────────────────────── ARTIFACT SCAN ──────────────────────────────</div>
+          <div class="file-index-hint" id="file-index-hint" style="display:none; color: var(--dim); font-size: 0.75rem; margin-bottom: 8px;"></div>
+
+          <div class="output-block" id="output-block">
+            <div class="output-line">
+              <span class="output-key">File              :</span>
+              <span class="output-val" id="file-name">malware.exe</span>
+            </div>
+            <div class="output-line">
+              <span class="output-key">MFT Modified      :</span>
+              <span class="output-val" id="mft-date">2026-02-20</span>
+            </div>
+            <div class="output-line">
+              <span class="output-key">USN Modify Event  :</span>
+              <span class="output-val" id="usn-date">2026-02-28</span>
+            </div>
+            <div class="output-line">
+              <span class="output-key">LogFile LSN       :</span>
+              <span class="output-val" id="lsn-val">89,001</span>
+            </div>
+            <div class="output-line">
+              <span class="output-key">Tamper Confidence :</span>
+              <span class="output-val severity-high" id="confidence-val">87%</span>
+            </div>
+            <div class="output-line">
+              <span class="output-key">Severity          :</span>
+              <span class="output-val severity-high" id="severity-val">HIGH</span>
+            </div>
+
+            <!-- Confidence bar -->
+            <div class="confidence-bar-wrap">
+              <div class="confidence-label">
+                <span>TAMPER CONFIDENCE</span>
+                <span id="confidence-bar-label">87%</span>
+              </div>
+              <div class="confidence-bar" aria-label="Tamper confidence progress bar">
+                <div class="confidence-fill"
+                     id="confidence-fill"
+                     style="width: 87%; background: linear-gradient(90deg, #ff3a3a, #ff3a3aaa); box-shadow: 0 0 10px rgba(255,58,58,0.5);"
+                     role="progressbar"
+                     aria-valuenow="87"
+                     aria-valuemin="0"
+                     aria-valuemax="100">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="output-divider">───────────────────────────────────────────────────────────────────────────</div>
+
+          <span class="terminal-cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- Target folder or file -->
+      <div class="file-select-row fade-in" data-delay="100">
+        <label for="target-file-path" class="file-select-label">Target folder or file (full path)</label>
+        <div class="file-select-wrap">
+          <div class="file-path-meta">
+            <label for="path-type" class="file-path-type-label">Path type</label>
+            <select id="path-type" class="file-path-type" aria-label="Path type">
+              <option value="auto" selected>Auto</option>
+              <option value="folder">Folder</option>
+              <option value="file">File</option>
+            </select>
+          </div>
+          <input type="text" id="target-file-path" class="file-path-input" placeholder="e.g. D:\Hackthon\Test File (folder) or D:\Hackthon\Test File\test2.txt (file)" aria-label="Full path to folder or file to analyze" />
+          <span class="file-select-hint">Paste path — folder scans all files; file scans single file</span>
+          <!-- Prev/Next buttons for multi-file results -->
+          <div class="file-nav-buttons" id="file-nav-buttons" style="display:none;">
+            <button type="button" class="btn btn-nav" id="prev-file-btn" aria-label="Previous file" title="Previous file">
+              ◀ Prev
+            </button>
+            <span class="file-nav-label" id="file-nav-label">File 1 of 1</span>
+            <button type="button" class="btn btn-nav" id="next-file-btn" aria-label="Next file" title="Next file">
+              Next ▶
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="demo-controls">
+        <button class="btn btn-primary" id="run-sim-btn" aria-label="Run forensic simulation">
+          RUN
+        </button>
+        <button class="btn btn-secondary" id="reset-sim-btn" aria-label="Reset simulation output">
+          ↺ Reset
+        </button>
+      </div>
+
+      <p class="scan-status" id="scan-status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <div class="gradient-line" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SOURCE BOARD (synced with Live Demo selection)
+  ════════════════════════════════════════════════════════════ -->
+  <section id="contradiction-board" aria-labelledby="contradiction-board-title">
+    <div class="demo-wrapper">
+      <div class="fade-in">
+        <p class="section-label">Forensic Correlation</p>
+        <h2 class="section-title" id="contradiction-board-title">
+          Source <span>Board</span>
+        </h2>
+        <div class="section-divider" style="margin: 0 auto;"></div>
+        <p style="color: rgba(232,244,248,0.5); font-size: 0.82rem; letter-spacing: 1px; margin-top: 8px;">
+          Source claims for the file currently selected in the Live Demo.
+        </p>
+      </div>
+      <div class="contradiction-board-box fade-in" data-delay="100">
+        <div class="contradiction-board-placeholder" id="contradiction-board-placeholder">
+          Run a scan in the Live Demo and select a file to see the Source Board here.
+        </div>
+        <div class="contradiction-board-content" id="contradiction-board-content" style="display:none;">
+          <h3 class="contradiction-board-filename" id="contradiction-board-filename"></h3>
+          <table class="contradiction-table">
+            <thead>
+              <tr>
+                <th>SOURCE</th>
+                <th>CLAIMS</th>
+              </tr>
+            </thead>
+            <tbody id="contradiction-table-body">
+            </tbody>
+          </table>
+          <div class="contradiction-summary" id="contradiction-summary">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gradient-line" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       INDIVIDUAL FILE DESCRIPTION (from Live Demo scan)
+  ════════════════════════════════════════════════════════════ -->
+  <section id="file-description" aria-labelledby="file-description-title">
+    <div class="demo-wrapper">
+      <div class="fade-in">
+        <p class="section-label">Analysis Report</p>
+        <h2 class="section-title" id="file-description-title">
+          Individual File <span>Description</span>
+        </h2>
+        <div class="section-divider" style="margin: 0 auto;"></div>
+        <p style="color: rgba(232,244,248,0.5); font-size: 0.82rem; letter-spacing: 1px; margin-top: 8px;">
+          Narrative report for the file currently selected in the Live Demo above.
+        </p>
+      </div>
+      <div class="file-description-box fade-in" data-delay="100">
+        <div class="file-description-content" id="file-description-content">
+          <p class="file-description-placeholder">Run a scan in the Live Demo and select a file to see its analysis description here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════════════════ -->
+  <footer id="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-logo" aria-label="Vigil logo">VI<span>GIL</span></div>
+
+      <div class="footer-text">
+        <p>Built for Digital Forensics &amp; Incident Response</p>
+        <p style="margin-top: 4px; font-size: 0.68rem; opacity: 0.6;">
+          NTFS Timeline Manipulation Detection &nbsp;|&nbsp; MFT · USN · LogFile Correlation
+        </p>
+        <span class="footer-badge">Research Prototype v1.0</span>
+      </div>
+
+      <div style="text-align:right; font-size: 0.68rem; color: var(--dim);">
+        <p>&copy; 2026 Vigil</p>
+        <p style="margin-top: 4px; color: rgba(0,255,255,0.4);">Forensic Intelligence</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pywin32==311
+construct==2.10.68
+# Use a newer Pydantic with prebuilt cp313 wheels to avoid
+# compiling pydantic-core with Rust on Python 3.13.
+pydantic==2.10.4
+python-multipart==0.0.9
+aiofiles==23.2.1
+websockets==12.0
